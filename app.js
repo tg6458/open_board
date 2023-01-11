@@ -1,5 +1,7 @@
 const express = require("express");
 const socket = require("socket.io");
+// var http = require('https');
+
 
 const app = express(); //initilize the server
 // app.use(express.static(__dirname + '/public'));
@@ -14,11 +16,22 @@ let server = app.listen(port, () => {
   console.log("Listening port " + port);
 });
 
-let io = socket(server, {
+// let io = socket(server, {
+//   cors: {
+//     origin: '*',
+//   }
+// });
+
+var http = require('http');
+
+const io = require("socket.io")(server, {
   cors: {
-    origin: '*',
+    origin: "http://localhost:5500",
+    methods: ["GET", "POST"]
   }
 });
+
+// server.listen(port);
 
 io.on("connection", (socket) => {
   console.log("Made a connection");
@@ -36,3 +49,7 @@ io.on("connection", (socket) => {
     io.sockets.emit("redoUndo", data);
   });
 });
+
+// header('Access-Control-Allow-Origin: *');
+// header('Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE');
+// header('Access-Control-Allow-Headers: Content-Type, X-Auth-Token, Origin, Authorization');
