@@ -26,7 +26,7 @@ var http = require('http');
 
 const io = require("socket.io")(server, {
   cors: {
-    origin: "http://localhost:5500",
+    origin: "https://main--cheerful-basbousa-e3b597.netlify.app/",
     methods: ["GET", "POST"]
   }
 });
